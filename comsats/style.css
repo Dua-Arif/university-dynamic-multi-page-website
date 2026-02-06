@@ -1,0 +1,699 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background: url("bg.jpg") no-repeat center center/cover;
+  height: 100vh;
+}
+
+.main{
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+}
+
+/* NAVBAR */
+.navbar{
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+}
+
+.logo{
+  color: orange;
+  font-size: 30px;
+  margin-right: 40px;
+}
+
+.menu{
+  display: flex;
+  list-style: none;
+}
+
+.menu li{
+  margin: 0 15px;
+}
+
+.menu a{
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
+.search{
+  margin-left: auto;
+  display: flex;
+}
+
+.search input{
+  padding: 8px;
+  border: none;
+  outline: none;
+}
+
+.search button{
+  background: orange;
+  border: none;
+  padding: 8px 15px;
+  color: black;
+  cursor: pointer;
+}
+
+/* CONTENT */
+.content{
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  color: white;
+  width: 45%;
+}
+
+.content h1{
+  font-size: 45px;
+}
+
+.content span{
+  color: orange;
+  font-size: 55px;
+}
+
+.content p{
+  margin: 20px 0;
+  line-height: 25px;
+}
+
+.join-btn{
+  padding: 10px 30px;
+  background: orange;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* LOGIN BOX */
+.login-box{
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  width: 260px;
+  background: rgba(0,0,0,0.8);
+  padding: 25px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+}
+
+.login-box h2{
+  background: white;
+  color: orange;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.login-box input{
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid orange;
+  color: white;
+}
+
+.login-btn{
+  width: 100%;
+  padding: 10px;
+  background: orange;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.link{
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.link a{
+  color: orange;
+  text-decoration: none;
+}
+
+.liw{
+  margin-top: 15px;
+}
+
+.icons i{
+  margin: 10px 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* NAVBAR LINKS HOVER */
+.menu a:hover{
+  color: orange;
+  transition: 0.3s;
+}
+
+/* SEARCH BUTTON HOVER */
+.search button:hover{
+  background: white;
+  color: orange;
+  transition: 0.3s;
+}
+
+/* JOIN US BUTTON HOVER */
+.join-btn:hover{
+  background: white;
+  color: orange;
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+/* LOGIN BUTTON HOVER */
+.login-btn:hover{
+  background: white;
+  color: orange;
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
+/* INPUT FIELD FOCUS */
+.login-box input:focus{
+  outline: none;
+  border-bottom: 2px solid white;
+  transition: 0.3s;
+}
+
+/* SIGN UP LINK HOVER */
+.link a:hover{
+  text-decoration: underline;
+  color: white;
+}
+
+/* SOCIAL ICONS HOVER */
+.icons i:hover{
+  color: orange;
+  transform: scale(1.3);
+  transition: 0.3s;
+}
+
+/* LOGO HOVER */
+.logo:hover{
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/*homepage css code*/
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background: url("bg.jpg") no-repeat center center/cover;
+  height: 100vh;
+}
+
+.main{
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.6);
+  padding: 50px;
+}
+
+/* HEADER */
+.header-text{
+  color: white;
+  max-width: 600px;
+}
+
+.header-text h1{
+  font-size: 40px;
+  letter-spacing: 2px;
+}
+
+.header-text p{
+  margin-top: 10px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* CARDS */
+.cards{
+  display: grid;
+  grid-template-columns: repeat(2, 260px);
+  gap: 25px;
+  margin-top: 60px;
+}
+
+.card{
+  background: rgba(0,0,0,0.65);
+  border: 2px solid #9fd3ff;
+  border-radius: 15px;
+  padding: 25px;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.card i{
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #9fd3ff;
+}
+
+.card h3{
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card p{
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 0.9;
+}
+
+/* CARD HOVER */
+.card:hover{
+  transform: translateY(-8px) scale(1.03);
+  background: rgba(30,30,30,0.9);
+  box-shadow: 0 0 20px rgba(159,211,255,0.6);
+}
+
+.card:hover i{
+  color: white;
+}
+
+/* FOOTER */
+.footer{
+  position: absolute;
+  bottom: 20px;
+  left: 50px;
+  right: 50px;
+  color: white;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.8;
+}
+/*about*/
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background: linear-gradient(rgba(5,10,25,0.75),rgba(5,10,25,0.75)),
+              url("bg.jpg") no-repeat center/cover;
+  color:white;
+  min-height:100vh;
+  padding:30px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:30px;
+  font-size:30px;
+  letter-spacing:1px;
+}
+
+/* ICON BAR */
+.icon-bar{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:25px;
+}
+
+.icon-bar button{
+  padding:10px 16px;
+  background:#1e293b;
+  color:white;
+  border:1px solid #38bdf8;
+  border-radius:7px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.icon-bar button:hover{
+  background:#38bdf8;
+  color:black;
+  transform:scale(1.05);
+}
+
+/* DETAILS */
+.details{
+  max-width:900px;
+  margin:auto;
+  background:rgba(255,255,255,0.08);
+  padding:25px;
+  border-radius:12px;
+}
+
+.section{
+  display:none;
+}
+
+.section h2{
+  color:#38bdf8;
+  margin-bottom:15px;
+}
+
+.section ul{
+  list-style:none;
+}
+
+.section li{
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .icon-bar{
+    flex-direction:column;
+    align-items:center;
+  }
+}
+
+/*department*/
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+html, body{
+  min-height:100%;
+  color:white;
+}
+
+/* FULL PAGE BACKGROUND */
+body{
+  background:
+    linear-gradient(
+      rgba(5,10,25,0.75),
+      rgba(5,10,25,0.75)
+    ),
+    url("bg.jpg") no-repeat center center/cover;
+
+  background-attachment: fixed;
+}
+
+/* MAIN CONTAINER */
+.container{
+  display:flex;
+  min-height:100vh;
+  padding:30px;
+  gap:30px;
+  backdrop-filter: blur(2px);
+}
+
+/* LEFT SIDE */
+.departments{
+  width:40%;
+  background:rgba(255,255,255,0.08);
+  padding:25px;
+  border-radius:10px;
+}
+
+.departments h1{
+  margin-bottom:20px;
+}
+
+.departments ul{
+  list-style:none;
+}
+
+.departments li{
+  padding:12px;
+  margin-bottom:10px;
+  border:1px solid #38bdf8;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.departments li:hover{
+  background:#38bdf8;
+  color:black;
+  transform: scale(1.02);
+}
+
+#message{
+  margin-top:20px;
+  color:#22c55e;
+  font-weight:bold;
+}
+
+/* RIGHT SIDE */
+.database{
+  width:60%;
+  background:rgba(255,255,255,0.08);
+  padding:25px;
+  border-radius:10px;
+}
+
+.database h2{
+  margin-bottom:15px;
+}
+
+.database input{
+  padding:8px;
+  width:60%;
+  border:none;
+  outline:none;
+  border-radius:4px;
+}
+
+.database button{
+  padding:8px 15px;
+  background:#38bdf8;
+  border:none;
+  cursor:pointer;
+  border-radius:4px;
+}
+
+.database button:hover{
+  background:#0ea5e9;
+}
+
+/* TABLE */
+table{
+  width:100%;
+  margin-top:20px;
+  border-collapse:collapse;
+}
+
+th, td{
+  border:1px solid #38bdf8;
+  padding:10px;
+  text-align:center;
+}
+
+th{
+  background:rgba(56,189,248,0.2);
+}
+
+/* ACTION BUTTONS */
+.action-btn{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:5px 10px;
+  cursor:pointer;
+  border-radius:4px;
+}
+
+.action-btn:hover{
+  background:#dc2626;
+}
+
+.edit-btn{
+  background:#22c55e;
+  margin-right:5px;
+  border:none;
+  padding:5px 10px;
+  cursor:pointer;
+  border-radius:4px;
+}
+
+.edit-btn:hover{
+  background:#16a34a;
+}
+
+/*admission*/
+
+/* ================= GLOBAL RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body{
+  height:100%;
+}
+
+/* ================= FULL BACKGROUND ================= */
+body{
+  background:
+    linear-gradient(
+      rgba(5,10,25,0.65),
+      rgba(5,10,25,0.65)
+    ),
+    url("bg.jpg") no-repeat center center/cover;
+  color:white;
+  min-height:100vh;
+  padding:30px;
+  filter: contrast(110%) brightness(90%);
+}
+
+/* ================= TITLE ================= */
+.title{
+  text-align:center;
+  margin-bottom:30px;
+  font-size:28px;
+  letter-spacing:1px;
+}
+
+/* ================= ICON BAR ================= */
+.icon-bar{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.icon-bar button{
+  background:#1e293b;
+  color:white;
+  border:1px solid #38bdf8;
+  padding:12px 18px;
+  cursor:pointer;
+  border-radius:8px;
+  transition:0.3s;
+  font-size:15px;
+}
+
+.icon-bar button:hover{
+  background:#38bdf8;
+  color:#020617;
+  transform:scale(1.05);
+}
+
+/* ================= DETAILS SECTION ================= */
+.details{
+  max-width:900px;
+  margin:auto;
+  background:rgba(255,255,255,0.08);
+  padding:25px;
+  border-radius:12px;
+  backdrop-filter: blur(5px);
+}
+
+.details h2{
+  margin-bottom:15px;
+  text-align:center;
+  color:#38bdf8;
+}
+
+/* ================= INPUT + ADD BUTTON ================= */
+.details input{
+  width:65%;
+  padding:10px;
+  border:none;
+  outline:none;
+  border-radius:6px;
+  margin-right:10px;
+}
+
+.details button{
+  padding:10px 18px;
+  background:#38bdf8;
+  border:none;
+  cursor:pointer;
+  border-radius:6px;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.details button:hover{
+  background:#0ea5e9;
+  color:white;
+}
+
+/* ================= TABLE ================= */
+table{
+  width:100%;
+  margin-top:20px;
+  border-collapse:collapse;
+}
+
+th, td{
+  border:1px solid #38bdf8;
+  padding:12px;
+  text-align:center;
+}
+
+th{
+  background:#020617;
+  color:#38bdf8;
+}
+
+/* ================= ACTION BUTTONS ================= */
+td button{
+  margin:0 4px;
+  padding:6px 12px;
+  border:none;
+  cursor:pointer;
+  border-radius:5px;
+  font-size:13px;
+}
+
+/* Edit Button */
+td button:nth-child(1){
+  background:#22c55e;
+  color:black;
+}
+
+/* Delete Button */
+td button:nth-child(2){
+  background:#ef4444;
+  color:white;
+}
+
+td button:hover{
+  opacity:0.85;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+  .details input{
+    width:100%;
+    margin-bottom:10px;
+  }
+
+  .details button{
+    width:100%;
+  }
+}

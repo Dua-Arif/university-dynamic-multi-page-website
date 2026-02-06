@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>University website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="main">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <h2 class="logo">University website</h2>
+
+    <ul class="menu">
+      <li><a href="#">HOME</a></li>
+      <li><a href="#">ABOUT</a></li>
+      <li><a href="#">SERVICE</a></li>
+      <li><a href="#">DESIGN</a></li>
+      <li><a href="#">CONTACT</a></li>
+    </ul>
+
+    <div class="search">
+      <input type="text" placeholder="Hello guys">
+      <button>Search</button>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <h1>University<br><span>multi-page</span><br>website</h1>
+    <p>
+      “Learn from yesterday. <br>
+      Live for today. <br>
+      Hope for tomorrow.”
+    </p>
+    <button class="join-btn">JOIN US</button>
+  </div>
+
+  <!-- LOGIN BOX -->
+  <div class="login-box">
+    <h2>Login Here</h2>
+
+    <input type="email" id="email" placeholder="Enter Email Here">
+    <input type="password" id="password" placeholder="Enter Password Here">
+
+    <button class="login-btn" onclick="gonext()">Login</button>
+    <script>
+    function gonext() {
+      window.location.href ="home.html" ;
+      }  
+    </script>
+
+    <!-- Messages -->
+    <p id="msg" style="color:red; margin-top:10px;"></p>
+    <p id="success" style="color:lightgreen; margin-top:10px;"></p>
+
+    <p class="link">
+      Don’t have an account?<br>
+      <a href="#" onclick="signup()">Sign up</a> here
+    </p>
+
+    <p class="liw">Log in with</p>
+
+    <div class="icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-google"></i>
+      <i class="fab fa-skype"></i>
+    </div>
+  </div>
+
+</div>
+
+<!-- JAVASCRIPT LOGIC -->
+<script>
+  // Default account (already exists)
+  let savedEmail = "umarkhan@gmail.com";
+  let savedPassword = "12345";
+
+  function login() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    document.getElementById("msg").innerText = "";
+    document.getElementById("success").innerText = "";
+
+    if (email === savedEmail && password === savedPassword) {
+      // Login successful → Home page
+      window.location.href = "index.html";
+    } else {
+      // Wrong credentials
+      document.getElementById("msg").innerText =
+        "Wrong email or password. Forgot password?";
+    }
+  }
+
+  function signup() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    document.getElementById("msg").innerText = "";
+    document.getElementById("success").innerText = "";
+
+    if (email === "" || password === "") {
+      document.getElementById("msg").innerText =
+        "Please enter email and password to sign up";
+    } else {
+      // Create new account
+      savedEmail = email;
+      savedPassword = password;
+
+      document.getElementById("success").innerText =
+        "Account created successfully!";
+    }
+  }
+</script>
+
+</body>
+</html>

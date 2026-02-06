@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>University Admission System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="title">University Admission Management System</h1>
+
+<!-- START APPLICATION -->
+<div class="details">
+  <input type="text" id="applicantName" placeholder="Applicant Name">
+  <button onclick="startAdmission()">Start Application</button>
+</div>
+
+<!-- ICON BUTTONS -->
+<div class="icon-bar">
+  <button onclick="openSection('student')">👨‍🎓 Student Information</button>
+  <button onclick="openSection('academic')">📚 Academic Background</button>
+  <button onclick="openSection('requirements')">📝 Admission Requirements</button>
+  <button onclick="openSection('program')">🏫 Program Information</button>
+  <button onclick="openSection('status')">📊 Application Status</button>
+  <button onclick="openSection('documents')">📂 Documents</button>
+  <button onclick="openSection('communication')">📩 Communication</button>
+</div>
+
+<div class="details">
+  <h2 id="sectionTitle">Start application first</h2>
+
+  <input type="text" id="dataInput" placeholder="Enter value">
+  <button onclick="addData()">Add</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Value</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+<script>
+const API = "http://localhost:5000";
+
+let admissionId = null;
+let currentSection = "";
+
+const dataInput = document.getElementById("dataInput");
+const tableBody = document.getElementById("tableBody");
+const sectionTitle = document.getElementById("sectionTitle");
+const applicantName = document.getElementById("applicantName");
+
+/* START APPLICATION */
+async function startAdmission() {
+  const name = applicantName.value.trim();
+  if (!name) return alert("Enter applicant name");
+
+  const res = await fetch(`${API}/api/admission/start`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ applicant_name: name })
+  });
+
+  const data = await res.json();
+  console.log(data)
+  admissionId = data.admission_id;
+
+  sectionTitle.innerText = "Select a category";
+  alert("Application started");
+}
+
+/* OPEN SECTION */
+function openSection(section){
+  if (!admissionId) return alert("Start application first");
+
+  currentSection = section;
+  sectionTitle.innerText = section.toUpperCase() + " DETAILS";
+  loadData();
+}
+
+/* ADD DATA */
+async function addData(){
+  if (!currentSection) return alert("Select a category first");
+  if (!dataInput.value.trim()) return alert("Enter value");
+
+  await fetch(`${API}/api/admission`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      admission_id: admissionId,
+      section: currentSection,
+      value: dataInput.value
+    })
+  });
+
+  dataInput.value = "";
+  loadData();
+}
+
+/* LOAD DATA */
+async function loadData(){
+  tableBody.innerHTML = "";
+
+  const res = await fetch(`${API}/api/admission/${admissionId}/${currentSection}`);
+  const data = await res.json();
+
+  if (data.length === 0) {
+    tableBody.innerHTML = "<tr><td colspan='2'>No data yet</td></tr>";
+    return;
+  }
+
+  data.forEach(item => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${item.value}</td>
+      <td>
+        <button onclick="editData(${item.id}, '${item.value.replace(/'/g,"\\'")}')">Edit</button>
+        <button onclick="deleteData(${item.id})">Delete</button>
+      </td>
+    `;
+
+    tableBody.appendChild(row);
+  });
+}
+
+/* EDIT DATA */
+async function editData(id, oldValue){
+  const newValue = prompt("Edit value:", oldValue);
+  if (!newValue) return;
+
+  await fetch(`${API}/api/admission/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ value: newValue })
+  });
+
+  loadData();
+}
+
+/* DELETE DATA */
+async function deleteData(id){
+  if (!confirm("Delete this item?")) return;
+
+  await fetch(`${API}/api/admission/${id}`, {
+    method: "DELETE"
+  });
+
+  loadData();
+}
+</script>
+
+</body>
+</html>

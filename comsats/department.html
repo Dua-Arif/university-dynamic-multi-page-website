@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>University Departments</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="details">
+
+
+
+    <h1>University Departments</h1>
+
+    <h2>Departments List</h2>
+
+    <!-- Dynamic list from DB -->
+    <ul id="deptList"></ul>
+
+    <p id="message"></p>
+
+    <hr>
+
+    <h2>Department Database (Admin)</h2>
+
+    <input type="text" id="deptInput" placeholder="Enter Department Name">
+    <button id="addBtn">Add</button>
+
+    <br><br>
+
+    <table border="1" cellpadding="10">
+      <thead>
+        <tr>
+          <th>Department Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <!-- SCRIPT ALWAYS AT BOTTOM -->
+    <script>
+      const API = "http://localhost:5000";
+
+      const deptInput = document.getElementById("deptInput");
+      const tableBody = document.getElementById("tableBody");
+      const deptList = document.getElementById("deptList");
+      const message = document.getElementById("message");
+      const addBtn = document.getElementById("addBtn");
+
+      /* ============================
+         LOAD DEPARTMENTS FROM DB
+      ============================ */
+      async function loadDepartments() {
+        tableBody.innerHTML = "";
+        deptList.innerHTML = "";
+
+        try {
+          const res = await fetch(`${API}/api/departments`);
+          const departments = await res.json();
+
+          departments.forEach(d => {
+            addRow(d.id, d.name);
+            addListItem(d.name);
+          });
+        } catch (err) {
+          message.innerText = "❌ Failed to load departments";
+        }
+      }
+
+      /* ============================
+         ADD DEPARTMENT
+      ============================ */
+      addBtn.onclick = async () => {
+        const name = deptInput.value.trim();
+        if (!name) return alert("Enter department name");
+
+        try {
+          const res = await fetch(`${API}/api/admin/departments`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name })
+          });
+
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error);
+
+          deptInput.value = "";
+          message.innerText = "✅ Department added";
+          loadDepartments();
+
+        } catch (err) {
+          message.innerText = "❌ " + err.message;
+        }
+      };
+
+      /* ============================
+         CREATE TABLE ROW
+      ============================ */
+      function addRow(id, name) {
+        const row = document.createElement("tr");
+
+        const nameCell = document.createElement("td");
+        nameCell.innerText = name;
+
+        const actionCell = document.createElement("td");
+
+        // EDIT
+        const editBtn = document.createElement("button");
+        editBtn.innerText = "Edit";
+        editBtn.onclick = async () => {
+          const newName = prompt("Edit Department Name:", nameCell.innerText);
+          if (!newName) return;
+
+          await fetch(`${API}/api/admin/departments/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: newName })
+          });
+
+          loadDepartments();
+        };
+
+        // DELETE
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete";
+        deleteBtn.onclick = async () => {
+          if (!confirm("Delete this department?")) return;
+
+          await fetch(`${API}/api/admin/departments/${id}`, {
+            method: "DELETE"
+          });
+
+          message.innerText = "🗑 Department deleted";
+          loadDepartments();
+        };
+
+        actionCell.append(editBtn, deleteBtn);
+        row.append(nameCell, actionCell);
+        tableBody.appendChild(row);
+      }
+
+      /* ============================
+         PUBLIC LIST CLICK
+      ============================ */
+      function addListItem(name) {
+        const li = document.createElement("li");
+        li.innerText = name;
+        li.onclick = () => {
+          message.innerText = "You selected: " + name;
+        };
+        deptList.appendChild(li);
+      }
+
+      /* ============================
+         INITIAL LOAD
+      ============================ */
+      loadDepartments();
+    </script>
+  </div>
+
+</body>
+
+</html>

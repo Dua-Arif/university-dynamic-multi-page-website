@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>COMSATS Abbottabad - University Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1 class="title">COMSATS University Islamabad – Abbottabad Campus</h1>
+
+<!-- ICON / BUTTON BAR -->
+<div class="icon-bar">
+  <button onclick="showSection('basic')">🏛 University Info</button>
+  <button onclick="showSection('programs')">📚 Programs</button>
+  <button onclick="showSection('departments')">🏢 Departments</button>
+  <button onclick="showSection('research')">🔬 Research</button>
+  <button onclick="showSection('admission')">🎓 Admissions</button>
+  <button onclick="showSection('faculty')">👨‍🏫 Faculty</button>
+  <button onclick="showSection('ranking')">🏆 Rankings</button>
+  <button onclick="showSection('contact')">📞 Contact</button>
+</div>
+
+<div class="details">
+
+  <!-- BASIC INFO (static is fine) -->
+  <div class="section" id="basic">
+    <h2>University Information</h2>
+    <ul>
+      <li><b>Name:</b> COMSATS University Islamabad, Abbottabad Campus</li>
+      <li><b>Location:</b> Abbottabad, Khyber Pakhtunkhwa, Pakistan</li>
+      <li><b>Established:</b> 2001</li>
+      <li><b>Type:</b> Public Research University</li>
+      <li><b>Accreditation:</b> HEC Pakistan (Recognized)</li>
+    </ul>
+  </div>
+
+  <!-- PROGRAMS -->
+  <div class="section" id="programs">
+    <h2>Programs Offered</h2>
+    <ul id="programsList"></ul>
+  </div>
+
+  <!-- DEPARTMENTS -->
+  <div class="section" id="departments">
+    <h2>Departments</h2>
+    <ul id="departmentsList"></ul>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="section" id="research">
+    <h2>Research Facilities</h2>
+    <ul id="researchList"></ul>
+  </div>
+
+  <!-- ADMISSIONS -->
+  <div class="section" id="admission">
+    <h2>Admissions</h2>
+    <ul id="admissionsList"></ul>
+  </div>
+
+  <!-- FACULTY -->
+  <div class="section" id="faculty">
+    <h2>Faculty</h2>
+    <ul id="facultyList"></ul>
+  </div>
+
+  <!-- RANKING -->
+  <div class="section" id="ranking">
+    <h2>Rankings</h2>
+    <ul id="rankingList"></ul>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <h2>Contact Information</h2>
+    <ul id="contactList"></ul>
+  </div>
+
+</div>
+
+<script>
+const API = "http://localhost:5000";
+
+// Toggle sections
+function showSection(id){
+  document.querySelectorAll('.section')
+    .forEach(sec => sec.style.display = "none");
+  document.getElementById(id).style.display = "block";
+}
+
+// Generic loader
+async function loadList(endpoint, elementId, formatter = i => i.name || i.info){
+  try {
+    const res = await fetch(`${API}${endpoint}`);
+    const data = await res.json();
+    const ul = document.getElementById(elementId);
+    ul.innerHTML = data.map(d => `<li>${formatter(d)}</li>`).join("");
+  } catch {
+    document.getElementById(elementId).innerHTML = "<li>Failed to load</li>";
+  }
+}
+
+// Load all dynamic content
+loadList("/api/programs", "programsList");
+loadList("/api/departments", "departmentsList");
+loadList("/api/research", "researchList");
+loadList("/api/admissions", "admissionsList", d => d.info);
+loadList("/api/faculty", "facultyList", d => d.info);
+loadList("/api/rankings", "rankingList", d => d.info);
+loadList("/api/contact", "contactList", d => `<b>${d.label}:</b> ${d.value}`);
+
+// Default section
+showSection('basic');
+</script>
+
+</body>
+</html>
